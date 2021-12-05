@@ -9,6 +9,6 @@
   "dependencies": {},
   "devDependencies": {},
   "scripts": {
-    "start": "node ./01/index.js"
+    "start": "node ./01a/index.js"
   }
 }
