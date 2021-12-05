@@ -1,0 +1,14 @@
+{
+  "name": "aoc21",
+  "version": "1.0.0",
+  "description": "Advent of Code 2021",
+  "main": "index.js",
+  "author": "Chris Riley",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "start": "node ./01/index.js"
+  }
+}
