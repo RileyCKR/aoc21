@@ -6,18 +6,6 @@ let dataValues = data.split(',').map(it => parseInt(it))
 let SPAWN_COUNT = 6
 let INITIAL_SPAWN_PENALTY = 2
 
-class Fish {
-  spawnTimer
-
-  constructor(spawnTimer) {
-    this.spawnTimer = spawnTimer
-  }
-
-  tick = () => {
-    this.spawnTimer--
-  }
-}
-
 class Pond {
   fishSchool
   constructor(fishSchool) {
@@ -26,26 +14,29 @@ class Pond {
 
   tick = () => {
     let fishBabies = []
-    this.fishSchool.forEach(fish => {
-      fish.tick()
-      if (fish.spawnTimer < 0) {
-        fish.spawnTimer = SPAWN_COUNT
-        fishBabies.push(new Fish(SPAWN_COUNT + INITIAL_SPAWN_PENALTY))
+    for(let i = 0; i < this.fishSchool.length; i++){
+      this.fishSchool[i]--
+      if (this.fishSchool[i] < 0) {
+        this.fishSchool[i] = SPAWN_COUNT
+        fishBabies.push(SPAWN_COUNT + INITIAL_SPAWN_PENALTY)
       }
+    }
+
+    fishBabies.forEach(fish => {
+      this.fishSchool.push(fish)
     })
-    this.fishSchool.push(...fishBabies)
   }
 }
 
-let initialSchool = dataValues.map(it => new Fish(it))
+let initialSchool = dataValues
 let pond = new Pond(initialSchool)
 
-let generations = 80
+let generations = 256
 
 for(let i=0; i < generations; i++){
   pond.tick()
-  // console.log(pond.fishSchool)
+  console.log(`gen${i}, ${pond.fishSchool.length}`)
 }
-// console.log(pond)
+
 console.log('answer', pond.fishSchool.length)
 console.log('>=D')
